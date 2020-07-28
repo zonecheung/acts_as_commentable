@@ -53,9 +53,9 @@ module Juixe
             comment_roles.each do |role|
               define_role_based_inflection(role)
             end
-            has_many :all_comments, { :as => :commentable, :dependent => :destroy, class_name: 'Comment' }.merge(join_options)
+	    has_many :all_comments, join_options.reverse_merge(as: :commentable, dependent: :destroy, class_name: 'Comment')
           else
-            has_many :comments, {:as => :commentable, :dependent => :destroy}.merge(join_options)
+		  has_many :comments, join_options.reverse_merge(as: :commentable, dependent: :destroy)
           end
 
           comment_types.each do |role|
